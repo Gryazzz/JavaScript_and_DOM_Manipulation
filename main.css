@@ -1,8 +1,16 @@
-body {
-    margin: 0;
+*{
+    box-sizing: border-box;
     padding: 0;
-    background: rgb(78, 53, 54);
-    
+    margin: 0;
+  }
+
+/* html { height: 100%;
+} */
+
+
+body {
+    background: rgb(31, 22, 45);
+    /* min-height: 100%; */
 }
 
 /* Setting layout --------------------------------------------------- */
@@ -14,25 +22,28 @@ header {
   
 footer {
     grid-area: footer;
-    background:rgb(186, 103, 71);
+    background:rgb(53, 106, 196);
+    background: linear-gradient(to right, rgb(53, 106, 196), rgb(104, 61, 56));
+    z-index: 2;
   }
   
 article {
     grid-area: article;
-    background: rgb(198, 248, 140);
   }
   
 aside {
     grid-area: aside;
-    background: rgb(38, 50, 100);
+    background: linear-gradient(to top, rgb(53, 106, 196), rgb(31, 22, 45));
+    /* box-shadow: 5px 0px 1px 5px rgba(31, 22, 45, 0.8); */
   }
 
 .wrapper {
     display: grid;
     
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 150px auto auto;
-    grid-gap: 5px;
+    grid-template-rows: 150px calc(100vh - 170px) 20px;
+    /* grid-gap: 5px; */
+    height: 100vh;
     grid-template-areas: 
         "header header "
         "aside article"
@@ -43,7 +54,7 @@ aside {
 @media all and (max-width: 880px) {
     .wrapper {
         grid-template-columns: 1fr;
-        grid-template-rows: auto;
+        grid-template-rows: auto auto 300px auto;
         grid-template-areas:
         "header"
         "aside"
@@ -101,7 +112,7 @@ aside {
 }
 
 .search-fields {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 /* Table ---------------------------------------------- */
@@ -111,3 +122,22 @@ aside {
     background: url('images/bryan-goff-389291-unsplash.jpg') center repeat;
     
 }
+
+table tr td, table tr th{
+    
+    background: url('images/bryan-goff-389291-unsplash.jpg')  rgba(185, 114, 211, 0) !important;   
+}
+
+tr {
+    text-align: center;
+}
+
+.main {
+    overflow: auto;
+}
+
+#table {
+    height: calc(100vh - 180px);
+}
+
+/* Footer ------------------------------------------------- */

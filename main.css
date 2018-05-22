@@ -22,8 +22,7 @@ header {
   
 footer {
     grid-area: footer;
-    background:rgb(53, 106, 196);
-    background: linear-gradient(to right, rgb(53, 106, 196), rgb(104, 61, 56));
+    background: linear-gradient(to right, rgb(53, 106, 196), rgb(32, 23, 46));
     z-index: 2;
   }
   
@@ -119,13 +118,21 @@ aside {
 
 .main {
     padding: 30px;
-    background: url('images/bryan-goff-389291-unsplash.jpg') center repeat;
-    
+    background: url('images/bryan-goff-389291-unsplash.jpg') center;
+    /* opacity: 0.6; */
 }
 
-table tr td, table tr th{
-    
-    background: url('images/bryan-goff-389291-unsplash.jpg')  rgba(185, 114, 211, 0) !important;   
+.table tr td, .table tr th{
+    /* opacity: 0.8; */
+    /* background: url('images/bryan-goff-389291-unsplash.jpg');  */
+    color: aliceblue;
+}
+
+table tr td, table tr th:after {
+    content: "";
+    /* background: url(images/bryan-goff-389291-unsplash.jpg); */
+    /* opacity: 0.9; */
+    /* color: aliceblue; */
 }
 
 tr {
@@ -141,3 +148,20 @@ tr {
 }
 
 /* Footer ------------------------------------------------- */
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.footer a {
+    font-size: 10px;
+    text-decoration: none;
+    color: aliceblue;
+}
+
+.footer a:hover {
+    color: rgb(180, 98, 66);
+}

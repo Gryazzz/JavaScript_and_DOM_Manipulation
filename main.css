@@ -1,17 +1,20 @@
 body {
     margin: 0;
     padding: 0;
+    background: rgb(78, 53, 54);
     
 }
 
+/* Setting layout --------------------------------------------------- */
+
 header {
     grid-area: header;
-    background: bisque;
+    
   }
   
 footer {
     grid-area: footer;
-    background: bisque;
+    background:rgb(186, 103, 71);
   }
   
 article {
@@ -21,14 +24,14 @@ article {
   
 aside {
     grid-area: aside;
-    background: rgb(166, 211, 247);
+    background: rgb(38, 50, 100);
   }
 
 .wrapper {
     display: grid;
     
     grid-template-columns: 1fr 4fr;
-    /* grid-template-rows: auto; */
+    grid-template-rows: 150px auto auto;
     grid-gap: 5px;
     grid-template-areas: 
         "header header "
@@ -49,3 +52,62 @@ aside {
     }
 }
 
+/* Header ------------------------------------------------- */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: url('images/header.jpg') center no-repeat;
+    background-size: cover;
+    color: aliceblue;
+    text-shadow: 3px 3px 5px rgb(71, 71, 71);
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+@media all and (max-width: 880px) {
+    .header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.head-h1 {
+    margin-right: 30px;
+    font-size: 8vw;
+    font-weight: bold;  
+}
+
+.head-p {
+    align-self: flex-end;
+    font-size: 20px; 
+}
+
+/* Aside ----------------------------------------------- */
+
+/* .aside {
+    background: url('images/bryan-goff-389291-unsplash.jpg') center;
+} */
+
+.form-group {
+    padding: 20px;
+}
+
+#help {
+    color: aliceblue;   
+}
+
+.search-fields {
+    padding-bottom: 20px;
+}
+
+/* Table ---------------------------------------------- */
+
+.main {
+    padding: 30px;
+    background: url('images/bryan-goff-389291-unsplash.jpg') center repeat;
+    
+}

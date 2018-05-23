@@ -2,6 +2,7 @@ var $tablehead = document.querySelector('#table-head');
 var $tablebody = document.querySelector('#table-body');
 
 var $searchbutton = document.querySelector('#search');
+var $refreshbutton = document.querySelector('#refresh');
 
 var $date = document.querySelector('#date-time');
 var $city = document.querySelector('#city');
@@ -45,7 +46,8 @@ function render_table() {
     }
 }
 
-// filtering date/time
+// multisearch function
+
 function searching() {
 
     var dateInput = $date.value.trim(); //need regexp for dates 
@@ -56,7 +58,7 @@ function searching() {
 
     
     if ($date.value) {
-        alien_data = dataSet.filter(function(date) {
+        alien_data = alien_data.filter(function(date) {
         return date.datetime === dateInput;
     });
     }
@@ -76,14 +78,26 @@ function searching() {
     if ($shape.value) {
         alien_data = alien_data.filter(s => { return s.shape.toLowerCase() === shapeInput; });
     }
-    
-    
-    
+
     render_table()
     
 }
 
 $searchbutton.addEventListener('click', searching);
+$refreshbutton.addEventListener('click', refresh);
+
+// Refresh table data
+function refresh() {
+    alien_data = dataSet;
+
+    $city.value = '';
+    $date.value = '';
+    $state.value = '';
+    $country.value = '';
+    $shape.value = '';
+
+    render_table();
+}
 
 // function multisearch() {
 

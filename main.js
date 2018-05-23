@@ -45,19 +45,27 @@ function searching() {
     var countryInput = $country.value.trim().toLowerCase();
     var shapeInput = $shape.value.trim().toLowerCase();
 
-    alien_data = dataSet.filter(function(date) {
-        var lowdate = date.datetime.toLowerCase();
+    if ($date.value) {
+        alien_data = dataSet.filter(function(date) {
         return date.datetime === dateInput;
     });
-    if ($city.value) {
-        alien_data = alien_data.filter(c => { return c.city === cityInput; });
-    }
-    if ($state.value) {
-        alien_data = alien_data.filter(s => { return s.state === stateInput; });
     }
 
-    // var temporary_alien_data = '';
-    // temporary_alien_data = alien_data.filter(c => { return c.city === cityInput; });
+    if ($city.value) {
+        alien_data = alien_data.filter(c => { return c.city.toLowerCase() === cityInput; });
+    }
+    
+    if ($state.value) {
+        alien_data = alien_data.filter(s => { return s.state.toLowerCase() === stateInput; });
+    }
+
+    if ($country.value) {
+        alien_data = alien_data.filter(c => { return c.country.toLowerCase() === countryInput; });
+    }
+
+    if ($shape.value) {
+        alien_data = alien_data.filter(s => { return s.shape.toLowerCase() === shapeInput; });
+    }
 
     // alien_data = temporary_alien_data;
     render_table()

@@ -114,11 +114,33 @@ aside {
     padding-bottom: 10px;
 }
 
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
 /* Table ---------------------------------------------- */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-link {
+    background: rgb(31, 22, 45);
+    color: aliceblue;
+    border: none;
+}
+
+.page-link:hover {
+    background: rgb(59, 114, 196);
+    color: aliceblue;
+}
 
 .main {
     padding: 30px;
-    background: url('images/bryan-goff-389291-unsplash.jpg') center;
+    background: url('images/mainback.jpg') center;
     /* opacity: 0.6; */
 }
 
@@ -128,12 +150,12 @@ aside {
     color: aliceblue;
 }
 
-table tr td, table tr th:after {
-    content: "";
-    /* background: url(images/bryan-goff-389291-unsplash.jpg); */
+/* table tr td, table tr th:after {
+    content: ""; 
+    background: url(images/bryan-goff-389291-unsplash.jpg); */
     /* opacity: 0.9; */
-    /* color: aliceblue; */
-}
+    /* color: aliceblue;
+} */
 
 tr {
     text-align: center;

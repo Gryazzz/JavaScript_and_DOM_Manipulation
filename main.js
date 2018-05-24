@@ -11,7 +11,6 @@ var $country = document.querySelector('#country');
 var $shape = document.querySelector('#shape');
 
 var alien_data = dataSet;
-var temporary_alien_data;
 
 render_table();
 
@@ -39,10 +38,10 @@ function render_table() {
         }
     }
     catch (error) {
-        console.log('no data in the dataset');
+        console.log('NO data in the dataset');
         var $headrow = $tablehead.insertRow(0);
         var $headcell = $headrow.insertCell(0);
-        $headcell.innerText = 'No data in the dataset';
+        $headcell.innerText = 'Sorry we don\'t have the data you\'ve requested. Please do another search.';
     }
 }
 
@@ -56,9 +55,9 @@ function searching() {
     var countryInput = $country.value.trim().toLowerCase();
     var shapeInput = $shape.value.trim().toLowerCase();
 
-    
+
     if ($date.value) {
-        alien_data = alien_data.filter(function(date) {
+        alien_data = dataSet.filter(function(date) {
         return date.datetime === dateInput;
     });
     }
@@ -79,8 +78,7 @@ function searching() {
         alien_data = alien_data.filter(s => { return s.shape.toLowerCase() === shapeInput; });
     }
 
-    render_table()
-    
+    render_table()   
 }
 
 $searchbutton.addEventListener('click', searching);
@@ -99,30 +97,41 @@ function refresh() {
     render_table();
 }
 
-// function multisearch() {
+function pages() {
+    var n = 100;
+    var pagesnumber = alien_data.length / n - alien_data.length % n / 100 + 1;
 
-//     var dateInput = $date.value.trim(); //need regexp for dates 
-//     var cityInput = $city.value.trim().toLowerCase();
-//     var stateInput = $state.value.trim().toLowerCase();
-//     var countryInput = $country.value.trim().toLowerCase();
-//     var shapeInput = $shape.value.trim().toLowerCase();
+    while(p) { //current page number
+        
+        $tablehead.innerHTML = '';
+        $tablebody.innerHTML = '';
 
-//     var criterias = {
-//         datetime: dateInput,
-//         city: cityInput,
-//         state: stateInput,
-//         country: countryInput,
-//         shape: shapeInput
-//     }
+        var chunkdata = alien_data.slice(p*n, (p+1)*n);
 
-//     alien_data = dataSet.filter(function(obj) {
-//         return Object.keys(criterias).every(function(c) {
-//             return obj[c] == criterias[c];
-//         });
-//     });
+        try {
+            var $headrow = $tablehead.insertRow(0);
+            for (i=0; i < Object.keys(alien_data[0]).length; i++) {
+                var $headcell = $headrow.insertCell(i);
+                $headcell.innerText = Object.keys(alien_data[0])[i];
+            }
 
-//     render_table();
-// }
+            // setting up a table
+            for (i=0; i < n; i++) {
+                var $bodyrow = $tablebody.insertRow(i);
+                for (j=0; j < Object.keys(chunkdata[i]).length; j++) {
+                    var $bodycell = $bodyrow.insertCell(j);
+                    $bodycell.innerText = Object.values(chunkdata[i])[j];
+                }
+            }
+        }
+        catch (error) {
+            console.log('NO data in the dataset');
+            var $headrow = $tablehead.insertRow(0);
+            var $headcell = $headrow.insertCell(0);
+            $headcell.innerText = 'Sorry we don\'t have the data you\'ve requested. Please do another search.';
+        }
+        }
+}
 
 
 

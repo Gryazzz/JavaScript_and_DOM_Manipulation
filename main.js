@@ -87,7 +87,8 @@ function searching() {
         alien_data = alien_data.filter(s => { return s.shape.toLowerCase() === shapeInput; });
     }
 
-    render_table_chunk();   
+    render_table_chunk();
+    numberOfPages = Math.ceil(alien_data.length / perPage);   
 }
 
 $searchbutton.addEventListener('click', searching);
@@ -104,6 +105,7 @@ function refresh() {
     $shape.value = '';
 
     render_table_chunk();
+    numberOfPages = Math.ceil(alien_data.length / perPage);
 }
 
 //render data by chunks

@@ -1,8 +1,6 @@
-// var $tablehead = document.querySelector('#table-head');
 var $tablehead = d3.select('#table-head');
-// var $tablebody = document.querySelector('#table-body');
 var $tablebody = d3.select('#table-body');
-var $currentpage = d3.select('.curpage');
+
 
 var $searchbutton = d3.select('#search');
 var $refreshbutton = d3.select('#refresh');
@@ -14,6 +12,7 @@ var chunkdata = alien_data;
 var currentPage = 1;
 var perPage = 10;
 var numberOfPages = Math.ceil(alien_data.length / perPage);
+var $currentpage = d3.selectAll('.curpage');
 
 render_table_chunk();
 
@@ -63,15 +62,11 @@ function searching() {
 
 // Refresh table data
 function refresh() {
+    
     alien_data = dataSet;
 
-    d3.select('.form-control').nodes().value = '';
-
-    // cityInput.value('');
-    // dateInput = '';
-    // stateInput = '';
-    // countryInput = '';
-    // shapeInput = '';
+    var forms = d3.selectAll('.form-control').nodes();
+    forms.forEach(form => form.value = '');
 
     render_table_chunk();
     numberOfPages = Math.ceil(alien_data.length / perPage);
@@ -85,28 +80,16 @@ function render_table_chunk() {
     
     chunkdata = alien_data.slice((currentPage-1) * perPage, currentPage * perPage);
 
-    $currentpage.innerText = currentPage;
-
     try {
+        
+        //setting up a header
         var $headrow = $tablehead.append("tr");
         Object.keys(alien_data[0]).forEach(item => $headrow.append('td').text(item));
-
-
-        //setting up a header
-        // var $headrow = $tablehead.insertRow(0);
-        // Object.keys(alien_data[0]).forEach(function(item) {
-        //     var $headcell = $headrow.append('td').text(item);
-            // $headcell.innerText = item;
 
         // setting up a table
         chunkdata.forEach(function(item) {
             var $bodyrow = $tablebody.append('tr');
             Object.values(item).forEach(value => $bodyrow.append('td').text(value));
-            
-            // var $bodyrow = $tablebody.insertRow(index);
-                // var $bodycell = $bodyrow.insertCell(index);
-                // var $bodycell = ;
-                // $bodycell.innerText = item;
             });
         }
 
@@ -114,6 +97,7 @@ function render_table_chunk() {
         console.log('NO data in the dataset');
         $tablehead.append('tr').append('td').text('Sorry we do not have the data you have requested. Please refresh the page and do another search.');
     }
+    $currentpage.text(currentPage);
 }
 
 function nextPage() {
@@ -147,6 +131,8 @@ function lastPage() {
     currentPage = numberOfPages;
     render_table_chunk();
 }
+
+
 
 
 

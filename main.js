@@ -1,6 +1,6 @@
 var $tablehead = document.querySelector('#table-head');
 var $tablebody = document.querySelector('#table-body');
-var $pagination = document.querySelector('#pagination')
+var $currentpage = document.querySelector('.curpage');
 
 var $searchbutton = document.querySelector('#search');
 var $refreshbutton = document.querySelector('#refresh');
@@ -12,45 +12,45 @@ var $country = document.querySelector('#country');
 var $shape = document.querySelector('#shape');
 
 var alien_data = dataSet;
-var chunkdata = dataSet;
+var chunkdata = alien_data;
 
 //pagination variables
 var currentPage = 1;
 var perPage = 10;
 var numberOfPages = Math.ceil(alien_data.length / perPage);
 
-// render_table();
+
 render_table_chunk();
 
-function render_table() {
-    $tablehead.innerHTML = '';
-    $tablebody.innerHTML = '';
+// function render_table() {
+//     $tablehead.innerHTML = '';
+//     $tablebody.innerHTML = '';
 
-    // setting up a table header
+//     // setting up a table header
 
-    try {
-        var $headrow = $tablehead.insertRow(0);
-        for (i=0; i < Object.keys(alien_data[0]).length; i++) {
-            var $headcell = $headrow.insertCell(i);
-            $headcell.innerText = Object.keys(alien_data[0])[i];
-        }
+//     try {
+//         var $headrow = $tablehead.insertRow(0);
+//         for (i=0; i < Object.keys(alien_data[0]).length; i++) {
+//             var $headcell = $headrow.insertCell(i);
+//             $headcell.innerText = Object.keys(alien_data[0])[i];
+//         }
 
-        // setting up a table
-        for (i=0; i < alien_data.length; i++) {
-            var $bodyrow = $tablebody.insertRow(i);
-            for (j=0; j < Object.keys(alien_data[i]).length; j++) {
-                var $bodycell = $bodyrow.insertCell(j);
-                $bodycell.innerText = Object.values(alien_data[i])[j];
-            }
-        }
-    }
-    catch (error) {
-        console.log('NO data in the dataset');
-        var $headrow = $tablehead.insertRow(0);
-        var $headcell = $headrow.insertCell(0);
-        $headcell.innerText = 'Sorry we do not have the data you have requested. Please refresh the page and do another search.';
-    }
-}
+//         // setting up a table
+//         for (i=0; i < alien_data.length; i++) {
+//             var $bodyrow = $tablebody.insertRow(i);
+//             for (j=0; j < Object.keys(alien_data[i]).length; j++) {
+//                 var $bodycell = $bodyrow.insertCell(j);
+//                 $bodycell.innerText = Object.values(alien_data[i])[j];
+//             }
+//         }
+//     }
+//     catch (error) {
+//         console.log('NO data in the dataset');
+//         var $headrow = $tablehead.insertRow(0);
+//         var $headcell = $headrow.insertCell(0);
+//         $headcell.innerText = 'Sorry we do not have the data you have requested. Please refresh the page and do another search.';
+//     }
+// }
 
 // multisearch function
 
@@ -61,11 +61,13 @@ function searching() {
     var stateInput = $state.value.trim().toLowerCase();
     var countryInput = $country.value.trim().toLowerCase();
     var shapeInput = $shape.value.trim().toLowerCase();
+    currentPage = 1;
 
 
     if ($date.value) {
         alien_data = dataSet.filter(function(date) {
-        return date.datetime === dateInput;
+            
+            return date.datetime === dateInput;
     });
     }
     
@@ -85,7 +87,7 @@ function searching() {
         alien_data = alien_data.filter(s => { return s.shape.toLowerCase() === shapeInput; });
     }
 
-    render_table()   
+    render_table_chunk();   
 }
 
 $searchbutton.addEventListener('click', searching);
@@ -111,6 +113,8 @@ function render_table_chunk() {
     $tablebody.innerHTML = '';
     
     chunkdata = alien_data.slice((currentPage-1) * perPage, currentPage * perPage);
+
+    $currentpage.innerText = currentPage;
 
     try {
 

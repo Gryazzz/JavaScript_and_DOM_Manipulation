@@ -49,8 +49,12 @@
             
             <div class="table-wrapper table-responsive">
 
-                <!-- <div class="pagination"> -->
-                    <ul class="pagination">
+                <div class="pagination" id="pagination">
+                    <input class="page-link" type="button" id="first" onclick="firstPage()" value="first" />
+                    <input class="page-link" type="button" id="next" onclick="nextPage()" value="next" />
+                    <input class="page-link" type="button" id="previous" onclick="previousPage()" value="previous" />
+                    <input class="page-link" type="button" id="last" onclick="lastPage()" value="last" />
+                    <!-- <ul class="pagination">
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
@@ -66,8 +70,8 @@
                                 <span class="sr-only">Next</span>
                             </a>
                         </li>
-                    </ul>
-                <!-- </div> -->
+                    </ul> -->
+                </div>
 
                 <table id="table" class="table table-striped  table-hover table-sm">
                     <thead id="table-head">
@@ -82,6 +86,7 @@
             <a href="https://www.coloradowebcam.net/camera/rifle-colorado-webcam-colorado-river-bookcliff-mountain-west" target="blank">WE ARE HERE</a>
         </footer>
     </div>
+    
     <script src="partData.js"></script>
     <!-- <script src="data.js"></script> -->
     <script src="main.js"></script>

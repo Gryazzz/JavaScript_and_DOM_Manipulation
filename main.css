@@ -125,16 +125,17 @@ aside {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 15px;
 }
 
 .page-link {
-    background: rgb(31, 22, 45);
+    background: rgb(39, 43, 38);
     color: aliceblue;
     border: none;
 }
 
 .page-link:hover {
-    background: rgb(59, 114, 196);
+    background: rgb(67, 74, 80);
     color: aliceblue;
 }
 

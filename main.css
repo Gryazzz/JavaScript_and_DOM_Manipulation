@@ -1,16 +1,10 @@
-*{
-    box-sizing: border-box;
+*{  box-sizing: border-box;
     padding: 0;
     margin: 0;
   }
 
-/* html { height: 100%;
-} */
-
-
 body {
     background: rgb(31, 22, 45);
-    /* min-height: 100%; */
 }
 
 /* Setting layout --------------------------------------------------- */
@@ -119,13 +113,14 @@ aside {
     justify-content: space-between;
 }
 
-/* Table ---------------------------------------------- */
+/* MAIN ---------------------------------------------- */
 
+/* Pagination ---------------------------------------------- */
 .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 15px;  
 }
 
 .page-link {
@@ -138,6 +133,8 @@ aside {
     background: rgb(67, 74, 80);
     color: aliceblue;
 }
+
+/* Table ---------------------------------------------- */
 
 .main {
     padding: 30px;

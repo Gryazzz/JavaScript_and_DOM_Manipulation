@@ -70,6 +70,9 @@ function refresh() {
 
     render_table_chunk();
     numberOfPages = Math.ceil(alien_data.length / perPage);
+
+    d3.selectAll('.pagination')
+        .style('display', 'flex');
 }
 
 //render data by chunks
@@ -95,7 +98,12 @@ function render_table_chunk() {
 
     catch (error) {
         console.log('NO data in the dataset');
-        $tablehead.append('tr').append('td').text('Sorry we do not have the data you have requested. Please refresh the page and do another search.');
+        $tablehead.append('tr')
+            .append('td')
+            .text('Sorry we do not have the data you have requested. Please refresh the page and do another search.');
+        
+        d3.selectAll('.pagination')
+            .style('display', 'none'); 
     }
     $currentpage.text(currentPage);
 }

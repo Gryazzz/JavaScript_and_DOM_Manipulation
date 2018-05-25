@@ -12,7 +12,7 @@
     <div class="wrapper">
         <header class="header">
             <h1 class="head-h1">UFO</h1>
-            <p class="head-p">Aliens.. what do we know about them? Who is there behind? What if they live the next door?</p>
+            <p class="head-p">Aliens.. what do we know about them? What do they know about us? What if they live the next door?</p>
             
         </header>
         <aside class="aside">
@@ -49,15 +49,16 @@
             
             <div class="table-wrapper table-responsive">
 
-                <div class="pagination" id="pagination">
+                <div>
                     
                     <ul class="pagination">
                         <li class="page-item"><div class="page-link" onclick="firstPage()">first</div></li>
                         <li class="page-item"><div class="page-link" onclick="nextPage()">next</div></li>
                         <li class="page-item"><div class="page-link" onclick="previousPage()">previous</div></li>
                         <li class="page-item"><div class="page-link" onclick="lastPage()">last</div></li>
-                        <li class='page-item'><span class="page-link">current page: <span>4</span></span></li>
-                        <li class='page-item'><span class="page-link">go to page: <input></input></span></li>
+                        <li class='page-item'><span class="page-link">current page: <span class="curpage"></span></span></li>
+                        <!-- <li class='page-item'><span class="page-link">go to: <input></input></span></li>
+                        <li class='page-item'><div class="page-link" onclick="">go</div></li> -->
                     </ul>
 
                 </div>
@@ -68,6 +69,19 @@
                     <tbody id="table-body">
                     </tbody>
                     </table>
+                
+                <div>
+                    
+                    <ul class="pagination">
+                        <li class="page-item"><div class="page-link" onclick="firstPage()">first</div></li>
+                        <li class="page-item"><div class="page-link" onclick="nextPage()">next</div></li>
+                        <li class="page-item"><div class="page-link" onclick="previousPage()">previous</div></li>
+                        <li class="page-item"><div class="page-link" onclick="lastPage()">last</div></li>
+                        <li class='page-item'><span class="page-link">current page: <span class="curpage"></span></span></li>
+                        
+                    </ul>
+        
+                </div>
             </div>
             
         </article>
@@ -76,6 +90,7 @@
         </footer>
     </div>
     
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="partData.js"></script>
     <!-- <script src="data.js"></script> -->
     <script src="main.js"></script>

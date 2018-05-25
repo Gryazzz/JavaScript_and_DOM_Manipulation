@@ -1,5 +1,6 @@
 var $tablehead = document.querySelector('#table-head');
 var $tablebody = document.querySelector('#table-body');
+var $pagination = document.querySelector('#pagination')
 
 var $searchbutton = document.querySelector('#search');
 var $refreshbutton = document.querySelector('#refresh');
@@ -11,6 +12,8 @@ var $country = document.querySelector('#country');
 var $shape = document.querySelector('#shape');
 
 var alien_data = dataSet;
+var chunkdata = dataSet;
+var currentPage = 1;
 
 render_table();
 
@@ -41,7 +44,7 @@ function render_table() {
         console.log('NO data in the dataset');
         var $headrow = $tablehead.insertRow(0);
         var $headcell = $headrow.insertCell(0);
-        $headcell.innerText = 'Sorry we don\'t have the data you\'ve requested. Please do another search.';
+        $headcell.innerText = 'Sorry we do not have the data you have requested. Please refresh the page and do another search.';
     }
 }
 
@@ -50,7 +53,7 @@ function render_table() {
 function searching() {
 
     var dateInput = $date.value.trim(); //need regexp for dates 
-    var cityInput = $city.value.trim().toLowerCase();
+    var cityInput = $city.value.trim().toLowerCase(); //need regexp for partial entry
     var stateInput = $state.value.trim().toLowerCase();
     var countryInput = $country.value.trim().toLowerCase();
     var shapeInput = $shape.value.trim().toLowerCase();
@@ -97,41 +100,128 @@ function refresh() {
     render_table();
 }
 
-function pages() {
-    var n = 100;
-    var pagesnumber = alien_data.length / n - alien_data.length % n / 100 + 1;
+function chunk_render() {
 
-    while(p) { //current page number
-        
-        $tablehead.innerHTML = '';
-        $tablebody.innerHTML = '';
+    // $tablehead.innerHTML = '';
+    // $tablebody.innerHTML = '';
 
-        var chunkdata = alien_data.slice(p*n, (p+1)*n);
+    var perPage = 100;
+    var numberOfPages = Math.ceil(alien_data.length / perPage);
+    
+    
+    chunkdata = alien_data.slice((currentPage-1) * perPage, currentPage * perPage);
 
-        try {
-            var $headrow = $tablehead.insertRow(0);
-            for (i=0; i < Object.keys(alien_data[0]).length; i++) {
-                var $headcell = $headrow.insertCell(i);
-                $headcell.innerText = Object.keys(alien_data[0])[i];
-            }
+    //here should be rendertable function
 
-            // setting up a table
-            for (i=0; i < n; i++) {
-                var $bodyrow = $tablebody.insertRow(i);
-                for (j=0; j < Object.keys(chunkdata[i]).length; j++) {
-                    var $bodycell = $bodyrow.insertCell(j);
-                    $bodycell.innerText = Object.values(chunkdata[i])[j];
-                }
-            }
-        }
-        catch (error) {
-            console.log('NO data in the dataset');
-            var $headrow = $tablehead.insertRow(0);
-            var $headcell = $headrow.insertCell(0);
-            $headcell.innerText = 'Sorry we don\'t have the data you\'ve requested. Please do another search.';
-        }
-        }
+
 }
+
+chunk_render();
+
+
+
+//Pagination
+
+    // var list = alien_data;
+    // var pageList = new Array();
+    // var currentPage = 1;
+    // var numberPerPage = 100; //number of records per page
+    // var numberOfPages = Math.ceil(alien_data.length / numberPerPage);
+
+    // function nextPage() {
+    //     currentPage += 1;
+    //     loadList();
+    // }
+
+    // function previousPage() {
+    //     currentPage -= 1;
+    //     loadList();
+    // }
+
+    // function firstPage() {
+    //     currentPage = 1;
+    //     loadList();
+    // }
+
+    // function lastPage() {
+    //     currentPage = numberOfPages;
+    //     loadList();
+    // }
+
+    // function loadList() {
+    //     // var pageList = new Array();
+    //     // var currentPage = 1;
+    //     // var numberPerPage = 100; //number of records per page
+    //     // var numberOfPages = Math.ceil(alien_data.length / numberPerPage);
+    //     var begin = ((currentPage - 1) * numberPerPage);
+    //     var end = begin + numberPerPage;
+    
+    // pageList = alien_data.slice(begin, end);
+
+    //     try {
+    //         var $headrow = $tablehead.insertRow(0);
+    //         for (i=0; i < Object.keys(pageList[0]).length; i++) {
+    //             var $headcell = $headrow.insertCell(i);
+    //             $headcell.innerText = Object.keys(pageList[0])[i];
+    //         }
+
+    //         // setting up a table
+    //         for (i=0; i < n; i++) {
+    //             var $bodyrow = $tablebody.insertRow(i);
+    //             for (j=0; j < Object.keys(pageList[i]).length; j++) {
+    //                 var $bodycell = $bodyrow.insertCell(j);
+    //                 $bodycell.innerText = Object.values(pageList[i])[j];
+    //             }
+    //         }
+    //     }
+    //     catch (error) {
+    //         console.log('NO data in the dataset');
+    //         var $headrow = $tablehead.insertRow(0);
+    //         var $headcell = $headrow.insertCell(0);
+    //         $headcell.innerText = 'Sorry we don\'t have the data you\'ve requested. Please do another search.';
+    //     }
+    // }
+
+    // function check() {
+    //         document.querySelector("#next").disabled = currentPage == numberOfPages ? true : false;
+    //         document.querySelector("#previous").disabled = currentPage == 1 ? true : false;
+    //         document.querySelector("#first").disabled = currentPage == 1 ? true : false;
+    //         document.querySelector("#last").disabled = currentPage == numberOfPages ? true : false;
+    //     }
+    // check();         // determines the states of the pagination buttons
+
+
+
+    // while(p) { //current page number
+        
+    //     $tablehead.innerHTML = '';
+    //     $tablebody.innerHTML = '';
+
+    //     var chunkdata = alien_data.slice(p*n, (p+1)*n);
+
+    //     try {
+    //         var $headrow = $tablehead.insertRow(0);
+    //         for (i=0; i < Object.keys(alien_data[0]).length; i++) {
+    //             var $headcell = $headrow.insertCell(i);
+    //             $headcell.innerText = Object.keys(alien_data[0])[i];
+    //         }
+
+    //         // setting up a table
+    //         for (i=0; i < n; i++) {
+    //             var $bodyrow = $tablebody.insertRow(i);
+    //             for (j=0; j < Object.keys(chunkdata[i]).length; j++) {
+    //                 var $bodycell = $bodyrow.insertCell(j);
+    //                 $bodycell.innerText = Object.values(chunkdata[i])[j];
+    //             }
+    //         }
+    //     }
+    //     catch (error) {
+    //         console.log('NO data in the dataset');
+    //         var $headrow = $tablehead.insertRow(0);
+    //         var $headcell = $headrow.insertCell(0);
+    //         $headcell.innerText = 'Sorry we don\'t have the data you\'ve requested. Please do another search.';
+    //     }
+    // }
 
 
 

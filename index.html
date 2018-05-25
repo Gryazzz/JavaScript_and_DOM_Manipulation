@@ -50,27 +50,16 @@
             <div class="table-wrapper table-responsive">
 
                 <div class="pagination" id="pagination">
-                    <input class="page-link" type="button" id="first" onclick="firstPage()" value="first" />
-                    <input class="page-link" type="button" id="next" onclick="nextPage()" value="next" />
-                    <input class="page-link" type="button" id="previous" onclick="previousPage()" value="previous" />
-                    <input class="page-link" type="button" id="last" onclick="lastPage()" value="last" />
-                    <!-- <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </ul> -->
+                    
+                    <ul class="pagination">
+                        <li class="page-item"><div class="page-link" onclick="firstPage()">first</div></li>
+                        <li class="page-item"><div class="page-link" onclick="nextPage()">next</div></li>
+                        <li class="page-item"><div class="page-link" onclick="previousPage()">previous</div></li>
+                        <li class="page-item"><div class="page-link" onclick="lastPage()">last</div></li>
+                        <li class='page-item'><span class="page-link">current page: <span>4</span></span></li>
+                        <li class='page-item'><span class="page-link">go to page: <input></input></span></li>
+                    </ul>
+
                 </div>
 
                 <table id="table" class="table table-striped  table-hover table-sm">

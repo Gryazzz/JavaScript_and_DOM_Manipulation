@@ -16,7 +16,7 @@ var numberOfPages = Math.ceil(alien_data.length / perPage);
 var $currentpage = d3.selectAll('.curpage');
 
 render_table_chunk();
-
+dropdowns();
 
 $refreshbutton.on('click', refresh);
 $searchbutton.on('click', searching);
@@ -71,7 +71,7 @@ function searching() {
     // }
 
     render_table_chunk();
-    
+    dropdowns();
     // numberOfPages = Math.ceil(alien_data.length / perPage);   
 }
 
@@ -85,7 +85,7 @@ function refresh() {
     forms.forEach(form => form.value = '');
 
     render_table_chunk();
-    
+    dropdowns();
     // numberOfPages = Math.ceil(alien_data.length / perPage);
 
     d3.selectAll('.pagination')
@@ -126,7 +126,7 @@ function render_table_chunk() {
     $currentpage.text(currentPage);
     window.name = JSON.stringify(alien_data);
     numberOfPages = Math.ceil(alien_data.length / perPage);
-    dropdowns(alien_data);
+    
 }
 
 function nextPage() {
@@ -213,25 +213,30 @@ function lastPage() {
 
 //-----------------------------------------------------
 
-function dropdowns(data) {
+function dropdowns() {
 
     var datalist_ids = [];
+
+    // alien_data = alien_data;
+    console.log(alien_data);
 
     d3.selectAll('datalist').each(function(d) {
         datalist_ids.push('#' + this.id);
     });
 
-    Object.keys(data[0]).forEach((key, index) => {
-        
-        console.log(key);
-        
+    Object.keys(alien_data[0]).forEach((key, index) => {
+        console.log(key + alien_data.length);
         try {
 
-            var datalist = data.map(item => item[key]).filter((v, i, a) => a.indexOf(v) === i);
+            var datalist = alien_data.map(item => item[key]).filter((v, i, a) => a.indexOf(v) === i);
+
             datalist.forEach(value => {
                 var option = d3.select(datalist_ids[index]).append('option');
-                option.attr('value', value);   
-            })
+                option.attr('value', value);  
+                 
+            });
+            console.log(d3.select(datalist_ids[index]).selectAll('option')['_groups'][0].length);
+
         }
 
         catch (error) {

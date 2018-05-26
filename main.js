@@ -11,7 +11,7 @@ var chunkdata = alien_data;
 
 //pagination variables
 var currentPage = 1;
-var perPage = 10;
+var perPage = 50;
 var numberOfPages = Math.ceil(alien_data.length / perPage);
 var $currentpage = d3.selectAll('.curpage');
 
@@ -25,37 +25,49 @@ $searchbutton.on('click', searching);
 
 function searching() {
 
+    currentPage = 1;
+
     var dateInput = d3.select("#date-time").node().value; //need regexp for dates 
     var cityInput = d3.select("#city").node().value.trim().toLowerCase(); //need regexp for partial entry
     var stateInput = d3.select('#state').node().value.trim().toLowerCase();
     var countryInput = d3.select('#country').node().value.trim().toLowerCase();
     var shapeInput = d3.select('#shape').node().value.trim().toLowerCase();
-
-    currentPage = 1;
-
-
-    if (dateInput) {
-        alien_data = dataSet.filter(function(date) {
-            
-            return date.datetime === dateInput;
-    });
-    }
     
-    if (cityInput) {
-        alien_data = alien_data.filter(c => { return c.city.toLowerCase() === cityInput; }); //key name can be changed to automatic one. one day
-    }
+    var inpValues = [];
+    inpValues.push(dateInput, cityInput, stateInput, countryInput, shapeInput);
+
+    inpKeys = Object.keys(alien_data[0]);
+
+    inpValues.forEach((item, index) => {
+        if (item) {
+            alien_data = alien_data.filter(val => {
+                return val[inpKeys[index]].toLowerCase() === item;
+            });
+        }
+    });
+
+    // if (dateInput) {
+    //     alien_data = dataSet.filter(function(date) {
+            
+    //         return date.datetime === dateInput;
+    // });
+    // }
+    
+    // if (cityInput) {
+    //     alien_data = alien_data.filter(c => { return c.city.toLowerCase() === cityInput; }); //key name can be changed to automatic one. one day
+    // }
         
-    if (stateInput) {
-        alien_data = alien_data.filter(s => { return s.state.toLowerCase() === stateInput; });
-    }
+    // if (stateInput) {
+    //     alien_data = alien_data.filter(s => { return s.state.toLowerCase() === stateInput; });
+    // }
 
-    if (countryInput) {
-        alien_data = alien_data.filter(c => { return c.country.toLowerCase() === countryInput; });
-    }
+    // if (countryInput) {
+    //     alien_data = alien_data.filter(c => { return c.country.toLowerCase() === countryInput; });
+    // }
 
-    if (shapeInput) {
-        alien_data = alien_data.filter(s => { return s.shape.toLowerCase() === shapeInput; });
-    }
+    // if (shapeInput) {
+    //     alien_data = alien_data.filter(s => { return s.shape.toLowerCase() === shapeInput; });
+    // }
 
     render_table_chunk();
     numberOfPages = Math.ceil(alien_data.length / perPage);   
@@ -194,11 +206,48 @@ function lastPage() {
 // }
 
 
+//-----------------------------------------------------
+
+var datalist_ids = [];
+
+d3.selectAll('datalist').each(function(d) {
+    datalist_ids.push('#' + this.id);
+  });
+
+Object.keys(alien_data[0]).forEach((key, index) => {
+    
+    try {
+        dataL = alien_data.map(item => {
+            item.key;
+            // console.log(key)});
+        // 
+        datalist = dataL.filter((v, i, a) => a.indexOf(v) === i);
+        console.log(datalist);
+
+        // datalist.forEach(value => {
+        //     console.log(value);
+        //     var option = d3.select(datalist_ids[index]).append('option');
+        //     option.attr('value', value);
+            
+        // })
+        // console.log(key, index);
+        // console.log('add ' + key);
+    }
+    catch (error) {
+        console.log(error);
+    }
+})
 
 
-// window.onload = function() {
-//     localStorage.setItem("LocalStorage", alien_data);
-//  }
+// date_list = alien_data.map(item => item.datetime);
 
-// window.onload = alert(localStorage.getItem("LocalStorage"));
+// date_list.forEach(item => {
+//     var option = d3.select('#date_list').append('option');
+//     option.attr('value', item);
+// });
+
+
+// function dropdown() {
+
+// }
 

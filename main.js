@@ -217,7 +217,6 @@ function dropdowns() {
 
     var datalist_ids = [];
 
-    // alien_data = alien_data;
     console.log(alien_data);
 
     d3.selectAll('datalist').each(function(d) {
@@ -232,7 +231,10 @@ function dropdowns() {
 
             datalist.forEach(value => {
                 var option = d3.select(datalist_ids[index]).append('option');
-                option.attr('value', value);  
+                option.attr('value', value);
+                // option.attr('class', 'dropoptions');
+                // option.style('background', 'rgb(44, 65, 118)');
+                option.attr('class', "text-light bg-dark");
                  
             });
             console.log(d3.select(datalist_ids[index]).selectAll('option')['_groups'][0].length);

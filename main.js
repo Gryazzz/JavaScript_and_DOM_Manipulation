@@ -47,29 +47,6 @@ function searching() {
         }
     });
 
-    // if (dateInput) {
-    //     alien_data = dataSet.filter(function(date) {
-            
-    //         return date.datetime === dateInput;
-    // });
-    // }
-    
-    // if (cityInput) {
-    //     alien_data = alien_data.filter(c => { return c.city.toLowerCase() === cityInput; }); //key name can be changed to automatic one. one day
-    // }
-        
-    // if (stateInput) {
-    //     alien_data = alien_data.filter(s => { return s.state.toLowerCase() === stateInput; });
-    // }
-
-    // if (countryInput) {
-    //     alien_data = alien_data.filter(c => { return c.country.toLowerCase() === countryInput; });
-    // }
-
-    // if (shapeInput) {
-    //     alien_data = alien_data.filter(s => { return s.shape.toLowerCase() === shapeInput; });
-    // }
-
     render_table_chunk();
     dropdowns();
     // numberOfPages = Math.ceil(alien_data.length / perPage);   
@@ -223,27 +200,64 @@ function dropdowns() {
         datalist_ids.push('#' + this.id);
     });
 
-    Object.keys(alien_data[0]).forEach((key, index) => {
+    if (d3.selectAll('option').empty()) {
+
+        console.log('option is empty');
+        Object.keys(alien_data[0]).forEach((key, index) => {
         console.log(key + alien_data.length);
-        try {
+        
+            try {
 
-            var datalist = alien_data.map(item => item[key]).filter((v, i, a) => a.indexOf(v) === i);
+                var datalist = alien_data.map(item => item[key]).filter((v, i, a) => a.indexOf(v) === i);
 
-            datalist.forEach(value => {
-                var option = d3.select(datalist_ids[index]).append('option');
-                option.attr('value', value);
-                // option.attr('class', 'dropoptions');
-                // option.style('background', 'rgb(44, 65, 118)');
-                option.attr('class', "text-light bg-dark");
-                 
-            });
-            console.log(d3.select(datalist_ids[index]).selectAll('option')['_groups'][0].length);
+                datalist.forEach(value => {
+                    var option = d3.select(datalist_ids[index]).append('option');
+                    option.attr('value', value);
+                    // option.attr('class', 'dropoptions');
+                    // option.style('background', 'rgb(44, 65, 118)');
+                    option.attr('class', 'dropoptions');
+                    
+                });
+                // console.log(d3.select(datalist_ids[index]).selectAll('option')['_groups'][0].length);
 
-        }
+            }
 
-        catch (error) {
-            console.log(error);
-        }
-    });
+            catch (error) {
+                console.log(error);
+            }    
+
+        });
+    }
+    else  {
+            
+            d3.selectAll('.dropoptions').remove();
+            console.log('data removed');
+        
+            Object.keys(alien_data[0]).forEach((key, index) => {
+                console.log(key + alien_data.length);
+
+            try {
+
+                var datalist = alien_data.map(item => item[key]).filter((v, i, a) => a.indexOf(v) === i);
+                console.log(datalist);
+                datalist.forEach(value => {
+                    console.log(value);
+                    var option = d3.select(datalist_ids[index]).append('option');
+                    option.attr('value', value);
+                    option.attr('class', 'dropoptions');
+                    // option.style('background', 'rgb(44, 65, 118)');
+                    // option.attr('class', "text-light bg-dark");
+                    
+                });
+                console.log(d3.select(datalist_ids[index]).selectAll('option')['_groups'][0].length);
+
+            }
+
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
+
 }
 

@@ -17,6 +17,7 @@ var $currentpage = d3.selectAll('.curpage');
 
 render_table_chunk();
 
+
 $refreshbutton.on('click', refresh);
 $searchbutton.on('click', searching);
 
@@ -70,7 +71,8 @@ function searching() {
     // }
 
     render_table_chunk();
-    numberOfPages = Math.ceil(alien_data.length / perPage);   
+    
+    // numberOfPages = Math.ceil(alien_data.length / perPage);   
 }
 
 
@@ -83,7 +85,8 @@ function refresh() {
     forms.forEach(form => form.value = '');
 
     render_table_chunk();
-    numberOfPages = Math.ceil(alien_data.length / perPage);
+    
+    // numberOfPages = Math.ceil(alien_data.length / perPage);
 
     d3.selectAll('.pagination')
         .style('display', 'flex');
@@ -122,6 +125,8 @@ function render_table_chunk() {
 
     $currentpage.text(currentPage);
     window.name = JSON.stringify(alien_data);
+    numberOfPages = Math.ceil(alien_data.length / perPage);
+    dropdowns(alien_data);
 }
 
 function nextPage() {
@@ -208,46 +213,30 @@ function lastPage() {
 
 //-----------------------------------------------------
 
-var datalist_ids = [];
+function dropdowns(data) {
 
-d3.selectAll('datalist').each(function(d) {
-    datalist_ids.push('#' + this.id);
-  });
+    var datalist_ids = [];
 
-Object.keys(alien_data[0]).forEach((key, index) => {
-    
-    try {
-        dataL = alien_data.map(item => {
-            item.key;
-            // console.log(key)});
-        // 
-        datalist = dataL.filter((v, i, a) => a.indexOf(v) === i);
-        console.log(datalist);
+    d3.selectAll('datalist').each(function(d) {
+        datalist_ids.push('#' + this.id);
+    });
 
-        // datalist.forEach(value => {
-        //     console.log(value);
-        //     var option = d3.select(datalist_ids[index]).append('option');
-        //     option.attr('value', value);
-            
-        // })
-        // console.log(key, index);
-        // console.log('add ' + key);
-    }
-    catch (error) {
-        console.log(error);
-    }
-})
+    Object.keys(data[0]).forEach((key, index) => {
+        
+        console.log(key);
+        
+        try {
 
+            var datalist = data.map(item => item[key]).filter((v, i, a) => a.indexOf(v) === i);
+            datalist.forEach(value => {
+                var option = d3.select(datalist_ids[index]).append('option');
+                option.attr('value', value);   
+            })
+        }
 
-// date_list = alien_data.map(item => item.datetime);
-
-// date_list.forEach(item => {
-//     var option = d3.select('#date_list').append('option');
-//     option.attr('value', item);
-// });
-
-
-// function dropdown() {
-
-// }
+        catch (error) {
+            console.log(error);
+        }
+    });
+}
 

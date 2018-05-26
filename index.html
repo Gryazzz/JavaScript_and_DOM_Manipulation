@@ -17,34 +17,40 @@
             
         </header>
         <aside class="aside">
-            <!-- <div class="form"> -->
+            <div>
+            
                 <div class="form-group">
                     <div class='search-fields'>
-                        <input type="text" class="form-control text-light bg-dark" id="date-time" placeholder="Date/Time">
+                        <input type="text" class="form-control text-light bg-dark" list="date_list" id="date-time" placeholder="Date/Time"/>
+                        <datalist id="date_list"></datalist>
                         <small id="help">Enter date and time</small>
                     </div>
                     <div class="search-fields">
-                        <input type="text" class="form-control text-light bg-dark" id="city" placeholder="City">
+                        <input type="text" class="form-control text-light bg-dark" list="city_list" id="city" placeholder="City"/>
+                        <datalist id="city_list"></datalist>
                         <small id="help">Enter City</small>
                     </div>
                     <div class='search-fields'>
-                        <input type="text" class="form-control text-light bg-dark" id="state" placeholder="State">
+                        <input type="text" class="form-control text-light bg-dark" list="state_list" id="state" placeholder="State"/>
+                        <datalist id="state_list"></datalist>
                         <small id="help">Enter State</small>
                     </div>
                     <div class='search-fields'>
-                        <input type="text" class="form-control text-light bg-dark" id="country" placeholder="Country">
+                        <input type="text" class="form-control text-light bg-dark" list="country_list" id="country" placeholder="Country"/>
+                        <datalist id="country_list"></datalist>
                         <small id="help">Enter Country</small>
                     </div>
                     <div class='search-fields'>
-                        <input type="text" class="form-control text-light bg-dark" id="shape" placeholder="Shape">
+                        <input type="text" class="form-control text-light bg-dark" list="shape_list" id="shape" placeholder="Shape"/>
+                        <datalist id="shape_list"></datalist>
                         <small id="help">Enter Shape</small>
                     </div>
                     <div class="buttons">
                         <button id="search" class="btn btn-primary bg-dark">Search</button>
                         <button id="refresh" class="btn btn-primary bg-dark">Refresh</button>
                     </div>
-                </div>          
-            <!-- </div>         -->
+                </div>
+            </div>       
         </aside>
         <article class="main">
             
@@ -97,8 +103,8 @@
     
     <script src="https://d3js.org/d3.v4.min.js"></script>
     
-    <!-- <script src="partData.js"></script> -->
-    <script src="data.js"></script>
+    <script src="partData.js"></script>
+    <!-- <script src="data.js"></script> -->
     <script type="text/javascript" src="main.js"></script>
     
 </body>

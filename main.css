@@ -113,6 +113,12 @@ aside {
     justify-content: space-between;
 }
 
+.dropoptions {
+    background: rgb(44, 65, 118) !important;
+    /* background-color: rgb(44, 65, 118); */
+    color: aliceblue !important;
+}
+
 /* MAIN ---------------------------------------------- */
 
 /* Pagination ---------------------------------------------- */
@@ -123,15 +129,16 @@ aside {
     margin-bottom: 15px;  
 }
 
-.page-link {
+.page-link, .page-link a {
     background: rgb(39, 43, 38);
     color: aliceblue;
     border: none;
 }
 
-.page-link:hover {
+.page-link:hover, .page-link a:hover {
     background: rgb(67, 74, 80);
     color: aliceblue;
+    text-decoration: none;
 }
 
 /* Table ---------------------------------------------- */
@@ -176,13 +183,13 @@ tr {
     
 }
 
-.footer a {
+.footer div {
     font-size: 10px;
     text-decoration: none;
     color: aliceblue;
 }
 
-.footer a:hover {
+.footer div:hover {
     color: rgb(180, 98, 66);
     color: rgb(250, 201, 198);
 }

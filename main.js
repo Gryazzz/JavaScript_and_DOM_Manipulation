@@ -5,7 +5,6 @@ var $tablebody = d3.select('#table-body');
 var $searchbutton = d3.select('#search');
 var $refreshbutton = d3.select('#refresh');
 
-
 var alien_data = dataSet;
 var chunkdata = alien_data;
 
@@ -15,11 +14,40 @@ var perPage = 50;
 var numberOfPages = Math.ceil(alien_data.length / perPage);
 var $currentpage = d3.selectAll('.curpage');
 
+//set up a page
+changeDate();
 render_table_chunk();
-dropdowns();
+refresh();
+dropdowns(dropHelp);
 
 $refreshbutton.on('click', refresh);
 $searchbutton.on('click', searching);
+
+//change date format to YYYY/MM/DD
+
+function changeDate() {
+    dataSet.forEach(item => {
+        return item['datetime'] = dateFormat(item['datetime']); //terrible naming (datetime), just tired to change now
+    });
+}
+
+
+function dateFormat(d) {
+    
+        var date = d.split('/');
+      
+        if(date[0].length === 1){
+            date[0] = '0' + date[0];
+        };
+
+        if (date[1].length === 1){
+            date[1] = '0' + date[1];
+        };
+        
+        newDate = date[2] + '/' + date[0] + '/' + date[1];
+
+        return newDate
+}
 
 
 // multisearch function
@@ -28,28 +56,43 @@ function searching() {
 
     currentPage = 1;
 
-    var dateInput = d3.select("#date-time").node().value; //need regexp for dates 
-    var cityInput = d3.select("#city").node().value.trim().toLowerCase(); //need regexp for partial entry
-    var stateInput = d3.select('#state').node().value.trim().toLowerCase();
-    var countryInput = d3.select('#country').node().value.trim().toLowerCase();
-    var shapeInput = d3.select('#shape').node().value.trim().toLowerCase();
-    
+    var inputIds = [];
     var inpValues = [];
-    inpValues.push(dateInput, cityInput, stateInput, countryInput, shapeInput);
+
+    d3.selectAll('.form-control').each(function(d) {
+        inputIds.push('#' + this.id);
+    });
+
+    inputIds.forEach(item => {
+        inpValues.push(d3.select(item).node().value.trim().toLowerCase());
+    })
 
     inpKeys = Object.keys(alien_data[0]);
+    // add one more datetime to the array
+    inpKeys.unshift(Object.keys(alien_data[0])[0]);
 
     inpValues.forEach((item, index) => {
         if (item) {
-            alien_data = alien_data.filter(val => {
-                return val[inpKeys[index]].toLowerCase() === item;
-            });
+            if (index > 1) {
+                alien_data = alien_data.filter(val => {
+                    return val[inpKeys[index]].toLowerCase() === item;
+                });
+            }
+            else if (index === 0) {
+                alien_data = alien_data.filter(val => {
+                    return val[inpKeys[index]].toLowerCase() >= item;
+                });
+            }
+            else {
+                alien_data = alien_data.filter(val => {
+                    return val[inpKeys[index]].toLowerCase() <= item;
+                });
+            }
         }
     });
 
     render_table_chunk();
-    dropdowns();
-    // numberOfPages = Math.ceil(alien_data.length / perPage);   
+    dropdowns(dropHelp);
 }
 
 
@@ -62,11 +105,10 @@ function refresh() {
     forms.forEach(form => form.value = '');
 
     render_table_chunk();
-    dropdowns();
-    // numberOfPages = Math.ceil(alien_data.length / perPage);
+    dropdowns(dropHelp);
 
-    d3.selectAll('.pagination')
-        .style('display', 'flex');
+    currentPage = 1;
+    d3.selectAll('.pagination').style('display', 'flex');
 }
 
 //render data by chunks
@@ -189,12 +231,11 @@ function lastPage() {
 
 
 //-----------------------------------------------------
+// autocompletion dropdowns
 
-function dropdowns() {
+function dropdowns(callback) {
 
     var datalist_ids = [];
-
-    console.log(alien_data);
 
     d3.selectAll('datalist').each(function(d) {
         datalist_ids.push('#' + this.id);
@@ -202,62 +243,43 @@ function dropdowns() {
 
     if (d3.selectAll('option').empty()) {
 
-        console.log('option is empty');
-        Object.keys(alien_data[0]).forEach((key, index) => {
-        console.log(key + alien_data.length);
-        
-            try {
-
-                var datalist = alien_data.map(item => item[key]).filter((v, i, a) => a.indexOf(v) === i);
-
-                datalist.forEach(value => {
-                    var option = d3.select(datalist_ids[index]).append('option');
-                    option.attr('value', value);
-                    // option.attr('class', 'dropoptions');
-                    // option.style('background', 'rgb(44, 65, 118)');
-                    option.attr('class', 'dropoptions');
-                    
-                });
-                // console.log(d3.select(datalist_ids[index]).selectAll('option')['_groups'][0].length);
-
-            }
-
-            catch (error) {
-                console.log(error);
-            }    
-
-        });
+        try {
+            callback(datalist_ids);
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
+
     else  {
-            
             d3.selectAll('.dropoptions').remove();
-            console.log('data removed');
         
-            Object.keys(alien_data[0]).forEach((key, index) => {
-                console.log(key + alien_data.length);
-
-            try {
-
-                var datalist = alien_data.map(item => item[key]).filter((v, i, a) => a.indexOf(v) === i);
-                console.log(datalist);
-                datalist.forEach(value => {
-                    console.log(value);
-                    var option = d3.select(datalist_ids[index]).append('option');
-                    option.attr('value', value);
-                    option.attr('class', 'dropoptions');
-                    // option.style('background', 'rgb(44, 65, 118)');
-                    // option.attr('class', "text-light bg-dark");
-                    
-                });
-                console.log(d3.select(datalist_ids[index]).selectAll('option')['_groups'][0].length);
-
-            }
-
-            catch (error) {
-                console.log(error);
-            }
-        });
+        try {
+            callback(datalist_ids);
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
-
 }
 
+function dropHelp(d) {
+    inpKeys = Object.keys(alien_data[0]);
+        // add one more datetime to the array
+    inpKeys.unshift(Object.keys(alien_data[0])[0]);
+
+    inpKeys.forEach((key, index) => {
+        // console.log(key + alien_data.length);
+        
+        var datalist = alien_data.map(item => item[key]).filter((v, i, a) => a.indexOf(v) === i);
+
+        datalist.forEach(value => {
+            var option = d3.select(d[index]).append('option');
+            option.attr('value', value);
+            // option.style('background', 'rgb(44, 65, 118)');
+            option.attr('class', 'dropoptions');
+                    
+        });
+        // console.log(d3.select(datalist_ids[index]).selectAll('option')['_groups'][0].length);
+    });
+}

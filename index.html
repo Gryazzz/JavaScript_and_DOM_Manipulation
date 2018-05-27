@@ -21,27 +21,32 @@
             
                 <div class="form-group">
                     <div class='search-fields'>
-                        <input type="text" class="form-control text-light bg-dark" list="date_list" id="date-time" placeholder="Date/Time"/>
+                        <input type="text" class="form-control form-control-sm text-light bg-dark" list="date_list" id="date-start" placeholder="Start Date"/>
                         <datalist id="date_list"></datalist>
-                        <small id="help">Enter date and time</small>
+                        <small id="help">Enter start Date</small>
+                    </div>
+                    <div class='search-fields'>
+                        <input type="text" class="form-control form-control-sm text-light bg-dark" list="date_list" id="date-end" placeholder="End Date"/>
+                        <datalist id="date_list"></datalist>
+                        <small id="help">Enter end Date</small>
                     </div>
                     <div class="search-fields">
-                        <input type="text" class="form-control text-light bg-dark" list="city_list" id="city" placeholder="City"/>
+                        <input type="text" class="form-control form-control-sm text-light bg-dark" list="city_list" id="city" placeholder="City"/>
                         <datalist id="city_list"></datalist>
                         <small id="help">Enter City</small>
                     </div>
                     <div class='search-fields'>
-                        <input type="text" class="form-control text-light bg-dark" list="state_list" id="state" placeholder="State"/>
+                        <input type="text" class="form-control form-control-sm text-light bg-dark" list="state_list" id="state" placeholder="State"/>
                         <datalist id="state_list"></datalist>
                         <small id="help">Enter State</small>
                     </div>
                     <div class='search-fields'>
-                        <input type="text" class="form-control text-light bg-dark" list="country_list" id="country" placeholder="Country"/>
+                        <input type="text" class="form-control form-control-sm text-light bg-dark" list="country_list" id="country" placeholder="Country"/>
                         <datalist id="country_list"></datalist>
                         <small id="help">Enter Country</small>
                     </div>
                     <div class='search-fields'>
-                        <input type="text" class="form-control text-light bg-dark" list="shape_list" id="shape" placeholder="Shape"/>
+                        <input type="text" class="form-control form-control-sm text-light bg-dark" list="shape_list" id="shape" placeholder="Shape"/>
                         <datalist id="shape_list"></datalist>
                         <small id="help">Enter Shape</small>
                     </div>
@@ -64,6 +69,7 @@
                         <li class="page-item"><div class="page-link" onclick="previousPage()">previous</div></li>
                         <li class="page-item"><div class="page-link" onclick="lastPage()">last</div></li>
                         <li class='page-item'><span class="page-link">current page: <span class="curpage"></span></span></li>
+                        <li class="page-item"><div class="page-link"><a href="plot.html">Plot Me</a></div></li>
                         <!-- <li class='page-item'><span class="page-link">go to: <input></input></span></li>
                         <li class='page-item'><div class="page-link" onclick="">go</div></li> -->
                     </ul>
@@ -80,11 +86,13 @@
                 <div>
                     
                     <ul class="pagination">
+                    
                         <li class="page-item"><div class="page-link" onclick="firstPage()">first</div></li>
                         <li class="page-item"><div class="page-link" onclick="nextPage()">next</div></li>
                         <li class="page-item"><div class="page-link" onclick="previousPage()">previous</div></li>
                         <li class="page-item"><div class="page-link" onclick="lastPage()">last</div></li>
                         <li class='page-item'><span class="page-link">current page: <span class="curpage"></span></span></li>
+                        <li class="page-item"><div class="page-link"><a href="plot.html">Plot Me</a></div></li>
                         
                     </ul>
         
@@ -94,7 +102,7 @@
         </article>
         <footer class="footer">
             <!-- <div id="plothref" onclick='window.open("", "_self")'>Plot me</div> -->
-            <a href="plot.html">Check Me</a>
+            <div>All rights reserved</div>
             <!-- <a id="plothref" onclick='window.open("plot.html", "_self")'>Plot me</a> -->
             
         </footer>
@@ -103,8 +111,8 @@
     
     <script src="https://d3js.org/d3.v4.min.js"></script>
     
-    <script src="partData.js"></script>
-    <!-- <script src="data.js"></script> -->
+    <!-- <script src="partData.js"></script> -->
+    <script src="data.js"></script>
     <script type="text/javascript" src="main.js"></script>
     
 </body>

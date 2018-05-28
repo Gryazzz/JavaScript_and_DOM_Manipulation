@@ -149,10 +149,10 @@ aside {
     /* opacity: 0.6; */
 }
 
-.table-wrapper {
+/* .table-wrapper {
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
-}
+} */
 
 .table tr td, .table tr th{
     /* opacity: 0.8; */
@@ -172,7 +172,9 @@ tr {
 }
 
 .main {
-    overflow: auto;
+    /* overflow: auto; */
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 #table {

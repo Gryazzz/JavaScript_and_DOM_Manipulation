@@ -149,6 +149,11 @@ aside {
     /* opacity: 0.6; */
 }
 
+.table-wrapper {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
 .table tr td, .table tr th{
     /* opacity: 0.8; */
     /* background: url('images/bryan-goff-389291-unsplash.jpg');  */

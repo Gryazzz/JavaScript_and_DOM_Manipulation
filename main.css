@@ -77,16 +77,16 @@ aside {
         justify-content: center;
         align-items: center;
     }
-    .buttons {
-        display: flex;
-        justify-content: space-evenly;
-    }
 }
 
 .head-h1 {
     margin-right: 30px;
     font-size: 8vw;
     font-weight: bold;  
+}
+
+.head-h1:hover {
+    color: rgb(109, 161, 202);
 }
 
 .head-p {
@@ -115,6 +115,13 @@ aside {
 .buttons {
     display: flex;
     justify-content: space-between;
+}
+
+@media all and (max-width: 880px) {
+    .buttons {
+        display: flex;
+        justify-content: space-evenly;
+    }
 }
 
 .dropoptions {

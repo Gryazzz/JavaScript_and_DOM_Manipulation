@@ -77,6 +77,10 @@ aside {
         justify-content: center;
         align-items: center;
     }
+    .buttons {
+        display: flex;
+        justify-content: space-evenly;
+    }
 }
 
 .head-h1 {
@@ -146,6 +150,9 @@ aside {
 .main {
     padding: 30px;
     background: url('images/mainback.jpg') center;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    /* overflow: auto; */
     /* opacity: 0.6; */
 }
 
@@ -169,12 +176,6 @@ aside {
 
 tr {
     text-align: center;
-}
-
-.main {
-    /* overflow: auto; */
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
 }
 
 #table {
@@ -201,3 +202,16 @@ tr {
     color: rgb(250, 201, 198);
 }
 
+/* PLOT--------------------------------------- */
+.plot-h5 {
+    color: aliceblue;
+}
+
+.buttons-plot {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.buttons-plot h3 {
+    color: aliceblue;
+}

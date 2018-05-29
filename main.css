@@ -217,8 +217,11 @@ tr {
 .buttons-plot {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
-.buttons-plot h3 {
+.buttons-plot div {
     color: aliceblue;
 }

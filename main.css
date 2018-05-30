@@ -70,6 +70,12 @@ aside {
     padding-right: 20px;
 }
 
+.header:hover {
+    background: url('images/header2.jpg') center no-repeat;
+    background-size: cover;
+}
+
+
 @media all and (max-width: 880px) {
     .header {
         display: flex;

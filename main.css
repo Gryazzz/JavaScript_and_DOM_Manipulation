@@ -141,13 +141,13 @@ aside {
 }
 
 .page-link, .page-link a {
-    background: rgb(39, 43, 38);
+    background: rgb(5, 11, 33);
     color: aliceblue;
     border: none;
 }
 
 .page-link:hover, .page-link a:hover {
-    background: rgb(67, 74, 80);
+    background: rgb(84, 72, 175);
     color: aliceblue;
     text-decoration: none;
 }

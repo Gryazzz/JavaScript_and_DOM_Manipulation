@@ -3,8 +3,8 @@ $plotlink.on('click', plotting);
 
 function plotting() {
 
-    alien_data = JSON.parse(window.name);
-    var plotdata = alien_data.reduce((acc, val) => {
+    plot_data = JSON.parse(window.name);
+    var plotdata = plot_data.reduce((acc, val) => {
     acc[val.state.toUpperCase()] = acc[val.state.toUpperCase()] === undefined ? 1 : acc[val.state.toUpperCase()] += 1;
     return acc;
   }, {});

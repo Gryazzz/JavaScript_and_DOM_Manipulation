@@ -5,7 +5,8 @@ var $tablebody = d3.select('#table-body');
 var $searchbutton = d3.select('#search');
 var $refreshbutton = d3.select('#refresh');
 
-var alien_data = dataSet;
+// var alien_data = dataSet;
+var alien_data = newData;
 var chunkdata = alien_data;
 
 //pagination variables
@@ -15,7 +16,7 @@ var numberOfPages = Math.ceil(alien_data.length / perPage);
 var $currentpage = d3.selectAll('.curpage');
 
 //set up a page
-changeDate();
+// changeDate();
 render_table_chunk();
 refresh();
 dropdowns(dropHelp);
@@ -23,31 +24,31 @@ dropdowns(dropHelp);
 $refreshbutton.on('click', refresh);
 $searchbutton.on('click', searching);
 
-//change date format to YYYY/MM/DD
+//change date format to YYYY/MM/DD  Don't use it, because I changed the initial dataset
 
-function changeDate() {
-    dataSet.forEach(item => {
-        return item['datetime'] = dateFormat(item['datetime']); //terrible naming (datetime), just tired to change now
-    });
-}
+// function changeDate() {
+//     dataSet.forEach(item => {
+//         return item['datetime'] = dateFormat(item['datetime']); //terrible naming (datetime), just tired to change now
+//     });
+// }
 
 
-function dateFormat(d) {
+// function dateFormat(d) {
     
-        var date = d.split('/');
+//         var date = d.split('/');
       
-        if(date[0].length === 1){
-            date[0] = '0' + date[0];
-        };
+//         if(date[0].length === 1){
+//             date[0] = '0' + date[0];
+//         };
 
-        if (date[1].length === 1){
-            date[1] = '0' + date[1];
-        };
+//         if (date[1].length === 1){
+//             date[1] = '0' + date[1];
+//         };
         
-        newDate = date[2] + '/' + date[0] + '/' + date[1];
+//         newDate = date[2] + '/' + date[0] + '/' + date[1];
 
-        return newDate
-}
+//         return newDate
+// }
 
 
 // multisearch function
@@ -99,7 +100,8 @@ function searching() {
 // Refresh table data
 function refresh() {
     
-    alien_data = dataSet;
+    // alien_data = dataSet;
+    alien_data = newData;
 
     var forms = d3.selectAll('.form-control').nodes();
     forms.forEach(form => form.value = '');
